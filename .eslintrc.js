@@ -4,8 +4,6 @@ module.exports = {
   "plugins": ["flowtype", "jest", "react", "lodash"],
   "globals": {
     "Generator": true,
-    "waitFor": true,
-    "device": true,
     "__DEV__": true,
     "element": true,
     "by": true,
@@ -16,12 +14,7 @@ module.exports = {
     "global": true,
     "console": true,
     "setInterval": true,
-    "clearInterval": true,
-    "navigator": true,
-    "fetch": true,
-    "Headers": true,
-    "Request": true,
-    "process": true
+    "clearInterval": true
   },
   "settings": {
     "react": {
