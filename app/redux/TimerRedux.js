@@ -11,8 +11,8 @@ type TimerState = {
 
 const state: TimerState = {
   start: Date.now(),
-  end: Date.now() + 100000,
-  left: 100000
+  end: Date.now() + 111 * 1000,
+  left: 111 * 1000
 }
 
 export const INITIAL_STATE = Immutable(state)
@@ -35,4 +35,12 @@ export const TimerTypes = Types
 
 export default Creators
 
-export const secondsLeftSelector = ({timer}: Object) => parseInt(timer.left / 1000, 10)
+export const secondsLeftSelector: ({timer: TimerState}) => number = ({timer}) =>
+  timer.left == null
+    ? 0
+    : parseInt(timer.left / 1000, 10)
+
+export const secondsDiffSelector: ({timer: TimerState}) => number = ({timer}) =>
+  timer.end == null || timer.start == null
+    ? 0
+    : parseInt((timer.end - timer.start) / 1000, 10)

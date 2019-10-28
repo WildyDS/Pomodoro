@@ -10,15 +10,16 @@ import {Bar} from '../components/Progress'
 import styles from './styles/Root'
 
 import type {ComponentType} from 'react'
-import {secondsLeftSelector} from '../redux/TimerRedux'
+import {secondsDiffSelector, secondsLeftSelector} from '../redux/TimerRedux'
 
 type ConnectionProps = {
-  left: number
+  left: number,
+  diff: number
 }
 
 class App extends PureComponent<ConnectionProps> {
   render() {
-    const {left} = this.props
+    const {left, diff} = this.props
     return <>
       <StatusBar />
       <SafeAreaView>
@@ -28,7 +29,7 @@ class App extends PureComponent<ConnectionProps> {
           contentContainerStyle={styles.content}
         >
           <Timer secondsLeft={left} />
-          <Bar progress={left} />
+          <Bar progress={100 * left / diff} />
         </ScrollView>
       </SafeAreaView>
     </>
@@ -36,7 +37,8 @@ class App extends PureComponent<ConnectionProps> {
 }
 
 const mapStateToProps = (state) => ({
-  left: secondsLeftSelector(state)
+  left: secondsLeftSelector(state),
+  diff: secondsDiffSelector(state)
 })
 
 const ConnectedComponent: ComponentType<*> = connect(mapStateToProps)(App)

@@ -2,12 +2,11 @@
 
 import React, {PureComponent} from 'react'
 import {Text} from 'react-native'
+import {secondsToTimer} from './Utils'
 
 type Props = {
   secondsLeft?: number
 }
-
-const secondsToTimer = (seconds?: number) => seconds == null ? 'unknown' : `${seconds}`
 
 class Timer extends PureComponent<Props> {
   render() {

@@ -1,13 +1,13 @@
 // @flow
 
 import {StyleSheet} from 'react-native'
-import {Colors} from 'react-native/Libraries/NewAppScreen'
+import Theme from './../../themes'
 
 export default StyleSheet.create({
   scrollView: {
     width: '100%',
     height: '100%',
-    backgroundColor: Colors.dark
+    backgroundColor: Theme.Colors.background
   },
   content: {
     flex: 1,
