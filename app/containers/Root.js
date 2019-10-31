@@ -5,7 +5,8 @@ import {SafeAreaView, ScrollView, StatusBar} from 'react-native'
 import {connect} from 'react-redux'
 
 import Timer from '../components/Timer'
-import {Bar} from '../components/Progress'
+
+import TimerActions from '../redux/TimerRedux'
 
 import styles from './styles/Root'
 
@@ -17,9 +18,13 @@ type ConnectionProps = {
   diff: number
 }
 
-class App extends PureComponent<ConnectionProps> {
+type DispatchProps = {
+  startTimer: () => void
+}
+
+class App extends PureComponent<ConnectionProps & DispatchProps> {
   render() {
-    const {left, diff} = this.props
+    const {left, diff, startTimer} = this.props
     return <>
       <StatusBar />
       <SafeAreaView>
@@ -28,8 +33,7 @@ class App extends PureComponent<ConnectionProps> {
           style={styles.scrollView}
           contentContainerStyle={styles.content}
         >
-          <Timer secondsLeft={left} />
-          <Bar progress={100 * left / diff} />
+          <Timer secondsLeft={left} diff={diff} onPressStart={startTimer} />
         </ScrollView>
       </SafeAreaView>
     </>
@@ -41,6 +45,10 @@ const mapStateToProps = (state) => ({
   diff: secondsDiffSelector(state)
 })
 
-const ConnectedComponent: ComponentType<*> = connect(mapStateToProps)(App)
+const mapDispatchToProps = (dispatch) => ({
+  startTimer: () => dispatch(TimerActions.start())
+}: DispatchProps)
+
+const ConnectedComponent: ComponentType<*> = connect(mapStateToProps, mapDispatchToProps)(App)
 
 export default ConnectedComponent
