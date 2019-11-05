@@ -25,7 +25,7 @@ type DispatchProps = {
 class App extends PureComponent<ConnectionProps & DispatchProps> {
   handlePressStart = () => {
     const now = Date.now()
-    this.props.startTimer(now, now + 111000)
+    this.props.startTimer(now, now + 1000 * 60 * 25)
   }
 
   render() {
