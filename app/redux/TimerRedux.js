@@ -12,18 +12,30 @@ type Timer = {
 }
 
 type TimerState = {
-  [string]: Timer
+  [string]: Timer,
+  predefinedTimers: Array<PredefinedTimer>
 }
 
 export const POMODORO_KEY = 'pomodoro'
 export const SHORT_BREAK_KEY = 'short_break'
+
+export type PredefinedTimer = {
+  key: string,
+  time: number
+}
+
+const predefinedTimers: Array<PredefinedTimer> = [
+  {key: POMODORO_KEY, time: 25 * 60 * 1000},
+  {key: SHORT_BREAK_KEY, time: 5 * 60 * 1000}
+]
 
 const state: TimerState = {
   [POMODORO_KEY]: {
     start: null,
     end: null,
     left: null
-  }
+  },
+  predefinedTimers
 }
 
 export const INITIAL_STATE = Immutable(state)

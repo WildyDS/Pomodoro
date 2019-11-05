@@ -5,19 +5,21 @@ import {SafeAreaView, ScrollView, StatusBar} from 'react-native'
 import {connect} from 'react-redux'
 
 import Timer from '../components/Timer'
+import TimerActions, {secondsDiffSelector, secondsLeftSelector} from '../redux/TimerRedux'
 
-import TimerActions, {SHORT_BREAK_KEY, POMODORO_KEY} from '../redux/TimerRedux'
+import map from 'lodash/map'
 
 import styles from './styles/Root'
 
 import type {ComponentType} from 'react'
-import {secondsDiffSelector, secondsLeftSelector} from '../redux/TimerRedux'
+import type {PredefinedTimer} from '../redux/TimerRedux'
 
 type ConnectionProps = {
   [string]: {
     left: number,
     diff: number
-  }
+  },
+  predefinedTimers: Array<PredefinedTimer>
 }
 
 type DispatchProps = {
@@ -30,6 +32,14 @@ class App extends PureComponent<ConnectionProps & DispatchProps> {
     this.props.startTimer(key, now, now + this.props[key].time)
   }
 
+  renderTimer = (predefinedTimer: PredefinedTimer) => <Timer
+    key={predefinedTimer.key}
+    timerKey={predefinedTimer.key}
+    secondsLeft={this.props[predefinedTimer.key].left}
+    diff={this.props[predefinedTimer.key].diff}
+    onPressStart={this.handlePressStart}
+  />
+
   render() {
     return <>
       <StatusBar />
@@ -39,36 +49,29 @@ class App extends PureComponent<ConnectionProps & DispatchProps> {
           style={styles.scrollView}
           contentContainerStyle={styles.content}
         >
-          <Timer
-            timerKey={POMODORO_KEY}
-            secondsLeft={this.props[POMODORO_KEY].left}
-            diff={this.props[POMODORO_KEY].diff}
-            onPressStart={this.handlePressStart}
-          />
-          <Timer
-            timerKey={SHORT_BREAK_KEY}
-            secondsLeft={this.props[SHORT_BREAK_KEY].left}
-            diff={this.props[SHORT_BREAK_KEY].diff}
-            onPressStart={this.handlePressStart}
-          />
+          {map(this.props.predefinedTimers, this.renderTimer)}
         </ScrollView>
       </SafeAreaView>
     </>
   }
 }
 
-const mapStateToProps = (state) => ({
-  [POMODORO_KEY]: {
-    left: secondsLeftSelector(state, POMODORO_KEY),
-    diff: secondsDiffSelector(state, POMODORO_KEY),
-    time: 25 * 60 * 1000
-  },
-  [SHORT_BREAK_KEY]: {
-    left: secondsLeftSelector(state, SHORT_BREAK_KEY),
-    diff: secondsDiffSelector(state, SHORT_BREAK_KEY),
-    time: 5 * 60 * 1000
+const mapStateToProps = (state) => {
+  const {timer: {predefinedTimers}} = state
+  const result = {
+    predefinedTimers
   }
-})
+  // Баг еслинта
+  // eslint-disable-next-line no-unused-vars
+  for (const predefinedTimer of predefinedTimers) {
+    result[predefinedTimer.key] = {
+      left: secondsLeftSelector(state, predefinedTimer.key),
+      diff: secondsDiffSelector(state, predefinedTimer.key),
+      time: predefinedTimer.time
+    }
+  }
+  return result
+}
 
 const mapDispatchToProps = (dispatch) => ({
   startTimer: (key: string, start: number, end: number) => dispatch(TimerActions.start(key, start, end))
