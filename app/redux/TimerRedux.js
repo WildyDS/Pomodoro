@@ -15,6 +15,7 @@ type TimerState = {
 }
 
 export const POMODORO_KEY = 'pomodoro'
+export const SHORT_BREAK_KEY = 'short_break'
 
 const state: TimerState = {
   [POMODORO_KEY]: {
@@ -27,13 +28,13 @@ const state: TimerState = {
 export const INITIAL_STATE = Immutable(state)
 
 const {Types, Creators} = createActions({
-  start: ['id', 'start', 'end'],
+  start: ['key', 'start', 'end'],
   setTime: ['start', 'end'],
   update: null
 })
 
-const start = (state, {id, start, end}) => state.merge({
-  [id]: {
+const start = (state, {key, start, end}) => state.merge({
+  [key]: {
     start,
     end,
     left: end - start

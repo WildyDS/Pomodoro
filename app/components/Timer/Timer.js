@@ -8,16 +8,17 @@ import {Bar} from '../Progress'
 import styles from './styles/Timer'
 
 type Props = {|
-  onPressStart: () => void,
+  timerKey: string,
+  onPressStart: (key: string) => void,
   secondsLeft: number,
   diff: number
 |}
 
 class Timer extends PureComponent<Props> {
     handlePressStart = () => {
-      const {onPressStart} = this.props
+      const {onPressStart, timerKey} = this.props
       if (onPressStart) {
-        onPressStart()
+        onPressStart(timerKey)
       }
     }
 

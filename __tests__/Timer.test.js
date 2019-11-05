@@ -11,5 +11,10 @@ import renderer from 'react-test-renderer'
 
 // TODO: snapshot
 it('Timer renders correctly', () => {
-  renderer.create(<Timer diff={1} onPressStart={noop} secondsLeft={1} />)
+  renderer.create(<Timer
+    timerKey='test'
+    diff={1}
+    onPressStart={noop}
+    secondsLeft={1}
+  />)
 })
