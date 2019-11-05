@@ -6,7 +6,7 @@ import {connect} from 'react-redux'
 
 import Timer from '../components/Timer'
 
-import TimerActions from '../redux/TimerRedux'
+import TimerActions, {POMODORO_KEY} from '../redux/TimerRedux'
 
 import styles from './styles/Root'
 
@@ -19,12 +19,17 @@ type ConnectionProps = {
 }
 
 type DispatchProps = {
-  startTimer: () => void
+  startTimer: (start: number, end: number) => void
 }
 
 class App extends PureComponent<ConnectionProps & DispatchProps> {
+  handlePressStart = () => {
+    const now = Date.now()
+    this.props.startTimer(now, now + 111000)
+  }
+
   render() {
-    const {left, diff, startTimer} = this.props
+    const {left, diff} = this.props
     return <>
       <StatusBar />
       <SafeAreaView>
@@ -33,7 +38,7 @@ class App extends PureComponent<ConnectionProps & DispatchProps> {
           style={styles.scrollView}
           contentContainerStyle={styles.content}
         >
-          <Timer secondsLeft={left} diff={diff} onPressStart={startTimer} />
+          <Timer secondsLeft={left} diff={diff} onPressStart={this.handlePressStart} />
         </ScrollView>
       </SafeAreaView>
     </>
@@ -46,7 +51,7 @@ const mapStateToProps = (state) => ({
 })
 
 const mapDispatchToProps = (dispatch) => ({
-  startTimer: () => dispatch(TimerActions.start())
+  startTimer: (start: number, end: number) => dispatch(TimerActions.start(POMODORO_KEY, start, end))
 }: DispatchProps)
 
 const ConnectedComponent: ComponentType<*> = connect(mapStateToProps, mapDispatchToProps)(App)
