@@ -25,6 +25,7 @@ test('start timer', () => {
   expect(state).toEqual(expectation)
 })
 
+// TODO: больше тестов. например с отрицательным временем
 test('_updateReducer', () => {
   mockDate()
   const timer = {

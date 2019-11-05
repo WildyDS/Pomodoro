@@ -3,6 +3,7 @@
 import {createActions, createReducer} from 'reduxsauce'
 import Immutable from 'seamless-immutable'
 import reduce from 'lodash/reduce'
+import values from 'lodash/values'
 
 type Timer = {
   start: ?number,
@@ -44,9 +45,12 @@ const start = (state, {key, start, end}) => state.merge({
 const setTime = (state, {start, end}) => state.merge({start, end, left: end - start})
 
 export const _updateReducer = (acc: Object, timer: Timer, key: string) => {
-  acc[key] = {
-    ...timer,
-    left: timer.end == null ? null : timer.end - Date.now()
+  if (timer.end) {
+    const left = timer.end - Date.now()
+    acc[key] = {
+      ...timer,
+      left: left >= 0 ? left : 0
+    }
   }
   return acc
 }
@@ -72,3 +76,15 @@ export const secondsDiffSelector: ({timer: TimerState}, key?: string) => number 
   timer[key] == null || timer[key].end == null || timer[key].start == null
     ? 0
     : parseInt((timer[key].end - timer[key].start) / 1000, 10)
+
+export const highestTimerSecondsLeft: ({timer: TimerState}) => number = ({timer}) => {
+  let biggestTime = 0
+  // Отключение бага линтера
+  // eslint-disable-next-line no-unused-vars
+  for (const _timer: Timer of values(timer)) {
+    if (_timer.left && biggestTime < _timer.left) {
+      biggestTime = _timer.left
+    }
+  }
+  return biggestTime
+}
