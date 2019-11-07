@@ -15,6 +15,8 @@ export default StyleSheet.create({
   },
   innerBar: {
     backgroundColor: Theme.Colors.fill,
-    flex: 1
+    height: '100%',
+    position: 'absolute',
+    alignSelf: 'flex-start'
   }
 })

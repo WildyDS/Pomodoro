@@ -33,7 +33,9 @@ class App extends PureComponent<ConnectionProps & DispatchProps> {
   }
 
   renderTimer = (predefinedTimer: PredefinedTimer) => <Timer
+    style={styles.timer}
     key={predefinedTimer.key}
+    name={predefinedTimer.name}
     timerKey={predefinedTimer.key}
     secondsLeft={this.props[predefinedTimer.key].left}
     diff={this.props[predefinedTimer.key].diff}

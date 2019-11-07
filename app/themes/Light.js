@@ -13,6 +13,10 @@ const Fonts = {
   normal: {
     fontSize: 12,
     color: black
+  },
+  big: {
+    fontSize: 18,
+    color: black
   }
 }
 

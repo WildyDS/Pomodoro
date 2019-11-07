@@ -21,12 +21,13 @@ export const SHORT_BREAK_KEY = 'short_break'
 
 export type PredefinedTimer = {
   key: string,
-  time: number
+  time: number,
+  name: string
 }
 
 const predefinedTimers: Array<PredefinedTimer> = [
-  {key: POMODORO_KEY, time: 25 * 60 * 1000},
-  {key: SHORT_BREAK_KEY, time: 5 * 60 * 1000}
+  {key: POMODORO_KEY, time: 25 * 60 * 1000, name: 'Pomodoro'},
+  {key: SHORT_BREAK_KEY, time: 5 * 60 * 1000, name: 'Short break'}
 ]
 
 const state: TimerState = {
