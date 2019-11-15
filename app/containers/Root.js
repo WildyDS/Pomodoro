@@ -5,14 +5,14 @@ import {SafeAreaView, ScrollView, StatusBar} from 'react-native'
 import {connect} from 'react-redux'
 
 import Timer from '../components/Timer'
-import TimerActions, {secondsDiffSelector, secondsLeftSelector} from '../redux/TimerRedux'
+import {Actions as TimerActions, secondsDiffSelector, secondsLeftSelector} from '../redux/Timer'
 
 import map from 'lodash/map'
 
 import styles from './styles/Root'
 
 import type {ComponentType} from 'react'
-import type {PredefinedTimer} from '../redux/TimerRedux'
+import type {PredefinedTimer} from '../redux/Timer/Types.flow'
 
 type ConnectionProps = {
   [string]: {

@@ -2,7 +2,7 @@
 
 import {put, delay, select} from 'redux-saga/effects'
 
-import TimerActions, {highestTimerSecondsLeft} from '../redux/TimerRedux'
+import {Actions as TimerActions, highestTimerSecondsLeft} from '../redux/Timer/'
 
 export function * start (): Generator<*, void, Object> {
   let left = 0

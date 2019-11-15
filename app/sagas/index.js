@@ -6,7 +6,7 @@ import {takeLatest, all} from 'redux-saga/effects'
 
 import {StartupTypes} from '../redux/StartupRedux'
 
-import {TimerTypes} from '../redux/TimerRedux'
+import {Types as TimerTypes} from '../redux/Timer'
 
 /* ------------- Sagas ------------- */
 

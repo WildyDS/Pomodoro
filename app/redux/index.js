@@ -7,9 +7,11 @@ import configureStore from './config/ConfigureStore'
 import rootSaga from '../sagas'
 import ReduxPersist from './config/ReduxPersist'
 
+import {reducer as timer} from './Timer'
+
 /* ------------- Assemble The Reducers ------------- */
 export const reducers = combineReducers({
-  timer: require('./TimerRedux').reducer
+  timer
 })
 
 export default () => {

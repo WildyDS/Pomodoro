@@ -1,6 +1,7 @@
 // @flow
 
-import TimerActions, {reducer, INITIAL_STATE, _updateReducer} from '../../app/redux/TimerRedux'
+import {Actions as TimerActions, reducer, INITIAL_STATE} from '../../app/redux/Timer'
+import {_updater} from '../../app/redux/Timer/Reducers'
 import Immutable from 'seamless-immutable'
 
 const currentDate = Date.now()
@@ -26,7 +27,7 @@ test('start timer', () => {
 })
 
 // TODO: больше тестов. например с отрицательным временем
-test('_updateReducer', () => {
+test('_updater', () => {
   mockDate()
   const timer = {
     start: 100000,
@@ -39,7 +40,7 @@ test('_updateReducer', () => {
       left: 100000
     }
   }
-  expect(_updateReducer({}, timer, 'timer')).toEqual(expectation)
+  expect(_updater({}, timer, 'timer')).toEqual(expectation)
   unmockDate()
 })
 
