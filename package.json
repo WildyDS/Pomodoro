@@ -12,6 +12,11 @@
     "precommit": "yarn flow && yarn lint && yarn test",
     "android:emulator": "(emulator=$($ANDROID_HOME/tools/bin/./avdmanager list avd | grep Name:| head -n 1 | awk '{print $2}') && $ANDROID_HOME/tools/./emulator -avd \"$emulator\") | (sleep 15 && adb reverse tcp:9090 tcp:9090 && echo connected)"
   },
+  "husky": {
+    "hooks": {
+      "pre-commit": "yarn precommit"
+    }
+  },
   "dependencies": {
     "@react-native-community/async-storage": "^1.6.2",
     "eslint-plugin-lodash": "^6.0.0",
@@ -33,6 +38,7 @@
     "babel-jest": "^24.9.0",
     "eslint": "^6.6.0",
     "flow-bin": "^0.105.0",
+    "husky": "^3.1.0",
     "jest": "^24.9.0",
     "metro-react-native-babel-preset": "^0.57.0",
     "react-test-renderer": "16.9.0",
