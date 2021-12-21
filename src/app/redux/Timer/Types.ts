@@ -14,5 +14,6 @@ export type TimerState = Immutable<{
 export type PredefinedTimer = {
   key: string,
   time: number,
-  name: string
+  name: string,
+  status: string,
 }

@@ -1,7 +1,7 @@
 import values from 'lodash/values'
 import {POMODORO_KEY} from './'
 
-import {Timer, TimerState} from './Types'
+import {TimerState} from './Types'
 
 export const secondsLeftSelector: ({timer}: { timer: TimerState }, key?: string) => number = ({timer}, key = POMODORO_KEY) =>
   timer[key] == null || timer[key].left == null
@@ -22,3 +22,15 @@ export const highestTimerSecondsLeft: ({timer}: { timer: TimerState }) => number
   }
   return biggestTime
 }
+
+export const statusSelector: ({timer}: { timer: TimerState }, key?: string) => string = ({timer}, key = POMODORO_KEY) => {
+  const ourTimer = timer[key];
+  if (ourTimer == null || ourTimer.left === null) {
+    return 'stopped';
+  }
+  if (ourTimer.left > 0) {
+    return 'started'
+  }
+  return 'stopped'
+}
+

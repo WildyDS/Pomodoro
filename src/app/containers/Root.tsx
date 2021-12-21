@@ -3,7 +3,9 @@ import {SafeAreaView, ScrollView, StatusBar} from 'react-native'
 import {connect} from 'react-redux'
 
 import Timer from '../components/Timer'
-import {Actions as TimerActions, secondsDiffSelector, secondsLeftSelector} from '../redux/Timer'
+import {
+  Actions as TimerActions, secondsDiffSelector, secondsLeftSelector, statusSelector
+} from '../redux/Timer'
 
 import map from 'lodash/map'
 
@@ -15,7 +17,8 @@ import type {PredefinedTimer} from '../redux/Timer/Types'
 type ConnectionProps = {
   [key: string]: {
     left: number,
-    diff: number
+    diff: number,
+    status: string,
   },
 } & { predefinedTimers: Array<PredefinedTimer> }
 
@@ -37,6 +40,7 @@ class App extends PureComponent<ConnectionProps & DispatchProps> {
     secondsLeft={this.props[predefinedTimer.key].left}
     diff={this.props[predefinedTimer.key].diff}
     onPressStart={this.handlePressStart}
+    status={predefinedTimer.status}
   />
 
   render() {
@@ -60,10 +64,9 @@ const mapStateToProps = (state) => {
   const result = {
     predefinedTimers
   }
-  // Баг еслинта
-  // eslint-disable-next-line no-unused-vars
   for (const predefinedTimer of predefinedTimers) {
     result[predefinedTimer.key] = {
+      status: statusSelector(state, predefinedTimer.key),
       left: secondsLeftSelector(state, predefinedTimer.key),
       diff: secondsDiffSelector(state, predefinedTimer.key),
       time: predefinedTimer.time

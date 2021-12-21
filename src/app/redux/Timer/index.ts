@@ -2,7 +2,7 @@ import {createReducer} from 'reduxsauce'
 import Immutable from 'seamless-immutable'
 import {Types, Creators as Actions} from './Actions'
 import {start, setTime, update} from './Reducers'
-import {secondsLeftSelector, secondsDiffSelector, highestTimerSecondsLeft} from './Selectors'
+import {secondsLeftSelector, secondsDiffSelector, highestTimerSecondsLeft, statusSelector} from './Selectors'
 import {predefinedTimers, POMODORO_KEY, SHORT_BREAK_KEY, LONG_BREAK_KEY} from './Config'
 
 import type {TimerState} from './Types'
@@ -34,5 +34,6 @@ export {
   secondsDiffSelector,
   highestTimerSecondsLeft,
   Actions,
-  Types
+  Types,
+  statusSelector
 }
