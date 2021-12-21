@@ -1,5 +1,3 @@
-// @flow
-
 import React from 'react'
 import {Provider} from 'react-redux'
 import RootContainer from './containers/Root'
@@ -26,11 +24,10 @@ const App = () => {
   </Provider>
 }
 
-let AppClass = App
-
-if (__DEV__) {
-  // $FlowFixMe
-  AppClass = console.tron.overlay(App) // eslint-disable-line
-}
+const AppClass = __DEV__
+// @ts-ignore
+// eslint-disable-next-line no-console
+  ? console.tron.overlay(App)
+  : App
 
 export default AppClass

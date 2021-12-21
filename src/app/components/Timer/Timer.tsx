@@ -1,23 +1,21 @@
 // @flow
 
 import React, {PureComponent} from 'react'
-import {Text} from 'react-native'
+import {Text, ViewStyle} from 'react-native'
 import {secondsToTimer} from './Utils'
 import {Bar} from '../Progress'
 import {Button} from '../Button'
 
 import styles from './styles/Timer'
 
-import type {ViewStyleProp} from 'react-native/Libraries/StyleSheet/StyleSheet'
-
-type Props = {|
+type Props = {
   timerKey: string,
   onPressStart: (key: string) => void,
   secondsLeft: number,
   diff: number,
-  style?: ViewStyleProp,
+  style?: ViewStyle,
   name?: string
-|}
+}
 
 class Timer extends PureComponent<Props> {
     handlePressStart = () => {

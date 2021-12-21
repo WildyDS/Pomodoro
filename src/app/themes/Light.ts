@@ -1,5 +1,3 @@
-// @flow
-
 import {blue, red, green, black, white} from './Colors'
 
 const Colors = {

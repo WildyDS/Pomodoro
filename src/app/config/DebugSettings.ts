@@ -1,5 +1,3 @@
-// @flow
-
 const SETTINGS = {
   yellowBox: __DEV__,
   reduxLogging: false

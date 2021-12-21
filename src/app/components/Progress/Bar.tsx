@@ -1,16 +1,12 @@
-// @flow
-
-import React, {PureComponent} from 'react'
-import {View} from 'react-native'
+import React, {PureComponent, ReactElement} from 'react'
+import {StyleProp, View, ViewStyle} from 'react-native'
 
 import styles from './styles/Bar'
 
-import type {ViewStyleProp} from 'react-native/Libraries/StyleSheet/StyleSheet'
-
 type Props = {
-  style?: ViewStyleProp,
+  style?: StyleProp<ViewStyle>,
   progress: number,
-  children?: Array<React$Element<any>>
+  children?: Array<ReactElement>
 }
 
 class Bar extends PureComponent<Props> {

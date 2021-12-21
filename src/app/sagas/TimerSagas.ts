@@ -1,10 +1,8 @@
-// @flow
-
 import {put, delay, select} from 'redux-saga/effects'
 
 import {Actions as TimerActions, highestTimerSecondsLeft} from '../redux/Timer/'
 
-export function * start (): Generator<*, void, Object> {
+export function * start (): Generator<any, void, Object> {
   let left = 0
   do {
     left = yield select(highestTimerSecondsLeft)

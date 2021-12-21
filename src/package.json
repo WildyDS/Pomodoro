@@ -7,9 +7,8 @@
     "ios": "react-native run-ios",
     "start": "react-native start",
     "test": "jest --testMatch='**/__tests__/**/*.test.js' --setupFiles=./__tests__/Setup",
-    "flow": "flow",
     "lint": "eslint .",
-    "precommit": "yarn flow && yarn lint && yarn test",
+    "precommit": "yarn tsc && yarn lint && yarn test",
     "android:emulator": "(emulator=$($ANDROID_HOME/tools/bin/./avdmanager list avd | grep Name:| head -n 1 | awk '{print $2}') && $ANDROID_HOME/tools/./emulator -avd \"$emulator\") | (sleep 15 && adb reverse tcp:9090 tcp:9090 && echo connected)"
   },
   "husky": {
@@ -32,20 +31,28 @@
     "seamless-immutable": "^7.1.4"
   },
   "devDependencies": {
-    "@babel/core": "^7.7.2",
-    "@babel/runtime": "^7.7.2",
-    "@react-native-community/eslint-config": "^0.0.5",
-    "babel-jest": "^24.9.0",
-    "eslint": "^6.6.0",
-    "flow-bin": "^0.105.0",
+    "@babel/core": "^7.12.9",
+    "@babel/runtime": "^7.12.5",
+    "@react-native-community/eslint-config": "^2.0.0",
+    "@types/jest": "^27.0.3",
+    "@types/lodash": "^4.14.178",
+    "@types/react": "^17.0.37",
+    "@types/react-native": "^0.66.9",
+    "@types/react-redux": "^7.1.20",
+    "@types/react-test-renderer": "^17.0.1",
+    "@types/redux-logger": "^3.0.9",
+    "@types/seamless-immutable": "^7.1.16",
+    "babel-jest": "^26.6.3",
+    "eslint": "7.14.0",
     "husky": "^3.1.0",
-    "jest": "^24.9.0",
-    "metro-react-native-babel-preset": "^0.57.0",
-    "react-test-renderer": "16.9.0",
+    "jest": "^26.6.3",
+    "metro-react-native-babel-preset": "^0.61.0",
+    "react-test-renderer": "17.0.2",
     "reactotron-apisauce": "^3.0.0",
     "reactotron-react-native": "^4.0.2",
     "reactotron-redux": "^3.1.2",
-    "reactotron-redux-saga": "^4.2.2"
+    "reactotron-redux-saga": "^4.2.2",
+    "typescript": "^4.5.4"
   },
   "jest": {
     "preset": "react-native"

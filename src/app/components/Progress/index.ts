@@ -1,7 +1,5 @@
-// @flow
-
 import Bar from './Bar'
 
-module.exports = {
+export {
   Bar
 }

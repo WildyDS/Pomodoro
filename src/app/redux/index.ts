@@ -1,7 +1,5 @@
-// @flow
-
 import {combineReducers} from 'redux'
-// $FlowFixMe
+
 import {persistReducer} from 'redux-persist'
 import configureStore from './config/ConfigureStore'
 import rootSaga from '../sagas'
@@ -27,8 +25,8 @@ export default () => {
   let {sagasManager} = configuredStore
   const {store, sagaMiddleware} = configuredStore
 
-  if ((module: Object).hot) {
-    (module: Object).hot.accept(() => {
+  if ((module as any).hot) {
+    (module as any).hot.accept(() => {
       store.replaceReducer(require('./').reducers)
 
       const newYieldedSagas = require('../sagas').default

@@ -1,11 +1,8 @@
-// @flow
-
 import immutablePersistenceTransform from './ImmutablePersistenceTransform'
 import AsyncStorage from '@react-native-community/async-storage'
 
 import ReduxPersist from './ReduxPersist'
 
-// $FlowFixMe
 import {persistStore} from 'redux-persist'
 import StartupActions from '../StartupRedux'
 
@@ -16,7 +13,7 @@ const ReducerVersions = {
 const logVersionChange = (localVersion: string) => {
   if (__DEV__) {
     // eslint-disable-next-line
-    (console: Object).tron.display({
+    (console as any).tron.display({
       name: 'PURGE',
       value: {
         'Old Version:': localVersion,
@@ -28,7 +25,7 @@ const logVersionChange = (localVersion: string) => {
   }
 }
 
-const purge = (store: Object, startup: Object, AsyncStorage: Object, localVersion: string) => {
+const purge = (store: any, startup: any, AsyncStorage: any, localVersion: string) => {
   // Purge store
   logVersionChange(localVersion)
   persistStore(store, null, startup)
@@ -36,7 +33,7 @@ const purge = (store: Object, startup: Object, AsyncStorage: Object, localVersio
     .then(() => AsyncStorage.setItem('reducerVersion', ReduxPersist.reducerVersion))
 }
 
-const updateReducers = (store: Object) => {
+const updateReducers = (store: any) => {
   const startup = () => {
     store.dispatch(StartupActions.startup())
   }

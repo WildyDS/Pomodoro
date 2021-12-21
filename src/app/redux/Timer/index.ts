@@ -1,5 +1,3 @@
-// @flow
-
 import {createReducer} from 'reduxsauce'
 import Immutable from 'seamless-immutable'
 import {Types, Creators as Actions} from './Actions'
@@ -7,7 +5,7 @@ import {start, setTime, update} from './Reducers'
 import {secondsLeftSelector, secondsDiffSelector, highestTimerSecondsLeft} from './Selectors'
 import {predefinedTimers, POMODORO_KEY, SHORT_BREAK_KEY, LONG_BREAK_KEY} from './Config'
 
-import type {TimerState} from './Types.flow'
+import type {TimerState} from './Types'
 
 const state: TimerState = {
   [POMODORO_KEY]: {
@@ -26,7 +24,7 @@ const reducer = createReducer(INITIAL_STATE, {
   [Types.UPDATE]: update
 })
 
-module.exports = {
+export {
   POMODORO_KEY,
   SHORT_BREAK_KEY,
   LONG_BREAK_KEY,

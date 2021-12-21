@@ -12,11 +12,11 @@ const fromImmutable = (obj) => {
 }
 
 // convert this JS object into an Immutable object
-const toImmutable = (raw: Object) => Immutable(raw)
+const toImmutable = (raw: any) => Immutable(raw)
 
 // the transform interface that redux-persist is expecting
 export default {
-  out: (state: Object) => toImmutable(state),
-  in: (raw: Object) => fromImmutable(raw)
+  out: (state: any) => toImmutable(state),
+  in: (raw: any) => fromImmutable(raw)
 
 }

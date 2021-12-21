@@ -1,5 +1,3 @@
-// @flow
-
 import React, {PureComponent} from 'react'
 import {SafeAreaView, ScrollView, StatusBar} from 'react-native'
 import {connect} from 'react-redux'
@@ -12,15 +10,14 @@ import map from 'lodash/map'
 import styles from './styles/Root'
 
 import type {ComponentType} from 'react'
-import type {PredefinedTimer} from '../redux/Timer/Types.flow'
+import type {PredefinedTimer} from '../redux/Timer/Types'
 
 type ConnectionProps = {
-  [string]: {
+  [key: string]: {
     left: number,
     diff: number
   },
-  predefinedTimers: Array<PredefinedTimer>
-}
+} & { predefinedTimers: Array<PredefinedTimer> }
 
 type DispatchProps = {
   startTimer: (key: string, start: number, end: number) => void
@@ -75,10 +72,10 @@ const mapStateToProps = (state) => {
   return result
 }
 
-const mapDispatchToProps = (dispatch) => ({
+const mapDispatchToProps = (dispatch: any) => ({
   startTimer: (key: string, start: number, end: number) => dispatch(TimerActions.start(key, start, end))
-}: DispatchProps)
+})
 
-const ConnectedComponent: ComponentType<*> = connect(mapStateToProps, mapDispatchToProps)(App)
+const ConnectedComponent: ComponentType<any> = connect(mapStateToProps, mapDispatchToProps)(App)
 
 export default ConnectedComponent

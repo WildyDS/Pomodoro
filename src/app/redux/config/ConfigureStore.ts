@@ -1,5 +1,3 @@
-// @flow
-
 import {createStore, applyMiddleware, compose} from 'redux'
 
 import {createLogger} from 'redux-logger'
@@ -18,7 +16,9 @@ export default (rootReducer: () => Object, rootSaga: () => Saga<any>) => {
   const enhancers = []
 
   /* ------------- Saga Middleware ------------- */
-  const sagaMonitor: ?SagaMonitor = __DEV__ ? ((console: Object).tron.createSagaMonitor()) : undefined
+  const sagaMonitor: SagaMonitor = __DEV__
+      ? ((console as any).tron.createSagaMonitor())
+      : undefined
   const sagaMiddleware: SagaMiddleware<any> = createSagaMiddleware({sagaMonitor})
   middleware.push(sagaMiddleware)
 
@@ -36,8 +36,8 @@ export default (rootReducer: () => Object, rootSaga: () => Saga<any>) => {
 
   /* ------------- Assemble Middleware ------------- */
   enhancers.push(applyMiddleware(...middleware))
-  if (__DEV__ && (console: Object).tron) {
-    enhancers.push((console: Object).tron.createEnhancer()) // eslint-disable-line
+  if (__DEV__ && (console as any).tron) {
+    enhancers.push((console as any).tron.createEnhancer()) // eslint-disable-line
   }
   const store = createStore(rootReducer, compose(...enhancers))
 

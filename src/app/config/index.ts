@@ -1,5 +1,3 @@
-// @flow
-
 import DebugSettings from './DebugSettings'
 import Reactotron, {asyncStorage, overlay, trackGlobalErrors} from 'reactotron-react-native'
 import Immutable from 'seamless-immutable'
@@ -12,7 +10,7 @@ const configure = () => {
   if (__DEV__) {
     // Totally hacky, but this allows you to not both importing reactotron-react-native
     // on every file. This is just DEV mode, so no big deal.
-        (console: Object).tron = Reactotron.configure({  // eslint-disable-line
+      (console as any).tron = Reactotron.configure({  // eslint-disable-line
       name: 'Pomodoro'
     })
       .useReactNative()
@@ -30,7 +28,7 @@ const configure = () => {
 
     // If ReactNative's yellow box warnings are too much, it is possible to turn
     // it off, but the healthier approach is to fix the warnings.  =)
-    (console: Object).disableYellowBox = !DebugSettings.yellowBox
+    (console as any).disableYellowBox = !DebugSettings.yellowBox
   }
 }
 

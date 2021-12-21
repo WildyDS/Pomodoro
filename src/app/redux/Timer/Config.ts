@@ -1,6 +1,4 @@
-// @flow
-
-import type {PredefinedTimer} from './Types.flow'
+import {PredefinedTimer} from './Types'
 
 export const POMODORO_KEY = 'pomodoro'
 export const SHORT_BREAK_KEY = 'short_break'

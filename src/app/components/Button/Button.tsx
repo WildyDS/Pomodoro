@@ -1,19 +1,15 @@
-// @flow
-
-import React, {PureComponent} from 'react'
-import {Text, TouchableOpacity} from 'react-native'
+import React, {PureComponent, ReactElement} from 'react'
+import {Text, TextStyle, TouchableOpacity, ViewStyle} from 'react-native'
 import styles from './styles/Button'
 
-import type {TextStyleProp, ViewStyleProp} from 'react-native/Libraries/StyleSheet/StyleSheet'
-
-type Props = {|
-  children?: Array<React$Element<any>>,
+type Props = {
+  children?: Array<ReactElement>,
   title?: string,
   onPress?: (value: any) => void,
   value?: any,
-  textStyle?: TextStyleProp,
-  style?: ViewStyleProp
-|}
+  textStyle?: TextStyle,
+  style?: ViewStyle
+}
 
 const hitSlop = {top: 6, bottom: 6, left:  6, right: 6}
 
